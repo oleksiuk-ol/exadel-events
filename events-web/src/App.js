@@ -1,12 +1,18 @@
-import logo from "./logo.svg";
 import { Box } from "@mui/material";
-import Header from "./layouts/Header";
+import Layout from "./layouts/Layout";
+import Authorization from "./pages/Authorization";
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
 function App() {
   return (
     <Box className="App">
-      <Header></Header>
+      {console.log("app.jsx")}
+      <Layout>
+        <Routes>
+          <Route path="auth" element={<Authorization />} />
+        </Routes>
+      </Layout>
     </Box>
   );
 }
