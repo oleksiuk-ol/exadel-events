@@ -25,8 +25,6 @@ const AuthForm = () => {
       ...user,
       [credField]: event.target.value,
     });
-    console.log(event.target.name);
-    console.log(user);
   };
 
   const handleButtonClick = () => {
@@ -37,7 +35,6 @@ const AuthForm = () => {
       .then((res) => {
         console.log(res);
       });
-    console.log(user);
   };
 
   return (
