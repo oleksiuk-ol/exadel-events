@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Box } from "@mui/material";
 import AuthForm from "../components/AuthForm";
 
@@ -12,6 +13,7 @@ const Authorization = () => {
       height="auto"
       padding="20px"
     >
+      {/* {postTest} */}
       {console.log("Auth")}
       <AuthForm></AuthForm>
     </Box>
