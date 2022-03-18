@@ -13,8 +13,10 @@ const app = express();
 const username = process.env.DB_USERNAME;
 const password = process.env.DB_PASSWORD;
 const cluster = process.env.DB_CLUSTER;
+var cors = require("cors");
 
 app.use(express.json());
+app.use(cors());
 
 mongoose.connect(
   `mongodb+srv://${username}:${password}@${cluster}.wa4xu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
