@@ -34,6 +34,7 @@ const AuthForm = () => {
       })
       .then((res) => {
         console.log(res);
+        localStorage.setItem("test", res.data);
       });
   };
 
@@ -60,7 +61,7 @@ const AuthForm = () => {
         name="password"
         onChange={handleInputChange}
       />
-
+      {console.log(localStorage.getItem("test"))}
       <Button variant="contained" onClick={handleButtonClick}>
         Log in
       </Button>
