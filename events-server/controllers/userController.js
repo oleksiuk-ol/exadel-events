@@ -7,17 +7,29 @@ function generateAccessToken(username) {
   return jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: "1800s" });
 }
 
-let testUser = new userModel({
-  email: "test@test.com",
-  password: "1234",
-  role: "user",
-});
+// let testUser = new userModel({
+//   email: "test@test.com",
+//   password: "1234",
+//   role: "user",
+// });
 
 const signUp = (req, res) => {
-  const newUser = {
+  const newUser = userModel({
     email: req.body.email,
     password: req.body.password,
-  };
+    role: "user",
+  });
+
+  newUser
+    .save()
+    .then((doc) => {
+      console.log(doc);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+
+  res.status(201).json(newUser);
 
   console.log(newUser);
   const token = generateAccessToken({ username: newUser.email });
@@ -29,15 +41,9 @@ const logIn = (req, res) => {
     email: req.body.email,
     password: req.body.password,
   };
+
   console.log(user);
-  testUser
-    .save()
-    .then((doc) => {
-      console.log(doc);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+
   res.status(201).json(user);
 };
 

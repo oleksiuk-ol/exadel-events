@@ -1,8 +1,10 @@
 let mongoose = require("mongoose");
 
 let userSchema = new mongoose.Schema({
-  unique: Boolean,
-  email: String,
+  email: {
+    type: String,
+    unique: true, // `email` must be unique
+  },
   password: String,
   role: String,
 });
