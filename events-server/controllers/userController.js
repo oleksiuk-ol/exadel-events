@@ -22,18 +22,15 @@ const signUp = (req, res) => {
 
   newUser
     .save()
-    .then((doc) => {
-      console.log(doc);
+    .then(() => {
+      const token = generateAccessToken({ username: newUser.email });
+      res.json(token);
+      res.status(201).json(newUser);
+      console.log(newUser);
     })
     .catch((err) => {
       console.error(err);
     });
-
-  res.status(201).json(newUser);
-
-  console.log(newUser);
-  const token = generateAccessToken({ username: newUser.email });
-  res.json(token);
 };
 
 const logIn = (req, res) => {
