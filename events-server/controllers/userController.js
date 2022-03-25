@@ -7,12 +7,6 @@ function generateAccessToken(username) {
   return jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: "1800s" });
 }
 
-// let testUser = new userModel({
-//   email: "test@test.com",
-//   password: "1234",
-//   role: "user",
-// });
-
 const signUp = (req, res) => {
   const newUser = userModel({
     email: req.body.email,
@@ -23,10 +17,11 @@ const signUp = (req, res) => {
   newUser
     .save()
     .then(() => {
-      const token = generateAccessToken({ username: newUser.email });
+      const token = generateAccessToken({
+        username: newUser.email,
+        role: newUser.role,
+      });
       res.json(token);
-      res.status(201).json(newUser);
-      console.log(newUser);
     })
     .catch((err) => {
       console.error(err);
@@ -34,14 +29,17 @@ const signUp = (req, res) => {
 };
 
 const logIn = (req, res) => {
-  const user = {
-    email: req.body.email,
-    password: req.body.password,
-  };
-
-  console.log(user);
-
-  res.status(201).json(user);
+  userModel.findOne({ email: req.body.email }, function (err, docs) {
+    if (err) {
+      console.log(err);
+    } else {
+      const token = generateAccessToken({
+        username: docs.email,
+        role: docs.role,
+      });
+      res.json(token);
+    }
+  });
 };
 
 module.exports = {
