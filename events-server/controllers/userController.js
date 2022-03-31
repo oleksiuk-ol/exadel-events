@@ -34,18 +34,24 @@ const signUp = async (req, res) => {
     });
 };
 
-const logIn = (req, res) => {
-  userModel.findOne({ email: req.body.email }, function (err, docs) {
-    if (err) {
-      console.log(err);
-    } else {
-      const token = generateAccessToken({
-        username: docs.email,
-        role: docs.role,
-      });
-      res.json(token);
-    }
-  });
+const logIn = async (req, res) => {
+  // userModel.findOne({ email: req.body.email }, function (err, docs) {
+  //   if (err) {
+  //     console.log(err);
+  //   } else {
+  //     const token = generateAccessToken({
+  //       username: docs.email,
+  //       role: docs.role,
+  //     });
+  //     res.json(token);
+  //   }
+  // });
+
+  const user = await userModel.findOne({ email: req.body.email });
+
+  const validPassword = await bcrypt.compare(req.body.password, user.password);
+
+  console.log(validPassword);
 };
 
 module.exports = {
