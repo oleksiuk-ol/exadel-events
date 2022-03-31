@@ -1,19 +1,25 @@
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 const userModel = require("../models/userModel");
+const bcrypt = require("bcryptjs");
+
+const saltRounds = 10;
+
 dotenv.config();
 
 function generateAccessToken(username) {
   return jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: "1800s" });
 }
 
-const signUp = (req, res) => {
+const signUp = async (req, res) => {
   const newUser = userModel({
     email: req.body.email,
     password: req.body.password,
     role: "user",
   });
 
+  newUser.password = await bcrypt.hash(newUser.password, saltRounds);
+  console.log(newUser);
   newUser
     .save()
     .then(() => {
