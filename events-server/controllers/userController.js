@@ -1,57 +1,41 @@
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
-const userModel = require("../models/userModel");
-const bcrypt = require("bcryptjs");
-
-const saltRounds = 10;
+const UserService = require("../services/userService");
 
 dotenv.config();
 
 function generateAccessToken(username) {
-  return jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: "1800s" });
+  return jwt.sign({ username }, process.env.TOKEN_SECRET, {
+    expiresIn: "1800s",
+  });
 }
 
-const signUp = async (req, res) => {
-  const newUser = userModel({
-    email: req.body.email,
-    password: req.body.password,
-    role: "user",
-  });
-
-  newUser.password = await bcrypt.hash(newUser.password, saltRounds);
-  console.log(newUser);
-  newUser
-    .save()
-    .then(() => {
-      const token = generateAccessToken({
-        username: newUser.email,
-        role: newUser.role,
-      });
-      res.json(token);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+const signUp = async function (req, res) {
+  try {
+    const result = await UserService.saveUser(
+      req.body.email,
+      req.body.password,
+      "user"
+    );
+    res.status(200).json(result);
+  } catch (e) {
+    console.log("ERROR", e);
+    res.status(400).send(e);
+  }
 };
 
 const logIn = async (req, res) => {
-  // userModel.findOne({ email: req.body.email }, function (err, docs) {
-  //   if (err) {
-  //     console.log(err);
-  //   } else {
-  //     const token = generateAccessToken({
-  //       username: docs.email,
-  //       role: docs.role,
-  //     });
-  //     res.json(token);
-  //   }
-  // });
-
-  const user = await userModel.findOne({ email: req.body.email });
-
-  const validPassword = await bcrypt.compare(req.body.password, user.password);
-
-  console.log(validPassword);
+  try {
+    const user = await UserService.getUserByEmail(
+      req.body.email,
+      req.body.password
+    );
+    const token = generateAccessToken(user.email);
+    res.status(200).json(token);
+  } catch (e) {
+    console.log("ERROR", e);
+    res.status(400).send(e);
+  }
 };
 
 module.exports = {
