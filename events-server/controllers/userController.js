@@ -17,7 +17,10 @@ const signUp = async function (req, res) {
       req.body.password,
       "user"
     );
-    res.status(200).json(result);
+
+    const token = generateAccessToken(result.email);
+
+    res.status(200).json(token);
   } catch (e) {
     console.log("ERROR", e);
     res.status(400).send(e);

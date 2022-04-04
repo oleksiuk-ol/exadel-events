@@ -23,6 +23,8 @@ exports.saveUser = async function (email, password, role) {
     });
 
     await user.save();
+
+    return user;
   } catch (e) {
     throw Error("Some error while saveUser");
   }
