@@ -1,8 +1,23 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
+import jwt_decode from "jwt-decode";
 
 const Home = () => {
-  return <Box>{console.log("home")}</Box>;
+  const handleButtonClick = () => {
+    console.log(localStorage.getItem("jwt"));
+    var decoded = jwt_decode(localStorage.getItem("jwt"));
+
+    console.log(decoded);
+  };
+
+  return (
+    <Box>
+      <Button variant="contained" onClick={handleButtonClick}>
+        Test jwt
+      </Button>
+      {console.log("home")}
+    </Box>
+  );
 };
 
 export default Home;

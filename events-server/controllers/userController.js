@@ -4,8 +4,8 @@ const UserService = require("../services/userService");
 
 dotenv.config();
 
-function generateAccessToken(username) {
-  return jwt.sign({ username }, process.env.TOKEN_SECRET, {
+function generateAccessToken(username, role) {
+  return jwt.sign({ username, role }, process.env.TOKEN_SECRET, {
     expiresIn: "1800s",
   });
 }
@@ -18,7 +18,7 @@ const signUp = async function (req, res) {
       "user"
     );
 
-    const token = generateAccessToken(result.email);
+    const token = generateAccessToken(result.email, result.role);
 
     res.status(200).json(token);
   } catch (e) {
@@ -33,7 +33,7 @@ const logIn = async (req, res) => {
       req.body.email,
       req.body.password
     );
-    const token = generateAccessToken(user.email);
+    const token = generateAccessToken(user.email, user.role);
     res.status(200).json(token);
   } catch (e) {
     console.log("ERROR", e);
