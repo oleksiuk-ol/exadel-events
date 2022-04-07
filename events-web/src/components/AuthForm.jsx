@@ -20,6 +20,9 @@ const AuthForm = () => {
     setIsNew(event.target.checked);
   };
   const handleInputChange = (event) => {
+    if (localStorage.getItem("jwt") !== null) {
+      console.log("Localstorage exist!", localStorage.getItem("jwt"));
+    }
     const credField = event.target.name;
     setUser({
       ...user,
@@ -34,7 +37,7 @@ const AuthForm = () => {
       })
       .then((res) => {
         console.log(res);
-        localStorage.setItem("test", res.data);
+        localStorage.setItem("jwt", res.data);
       });
   };
 
@@ -61,7 +64,6 @@ const AuthForm = () => {
         name="password"
         onChange={handleInputChange}
       />
-      {console.log(localStorage.getItem("test"))}
       <Button variant="contained" onClick={handleButtonClick}>
         Log in
       </Button>

@@ -1,6 +1,8 @@
 import { Box } from "@mui/material";
 import Layout from "./layouts/Layout";
 import Authorization from "./pages/Authorization";
+import Home from "./pages/Home";
+import Events from "./pages/Events";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
@@ -10,6 +12,8 @@ function App() {
       {console.log("app.jsx")}
       <Layout>
         <Routes>
+          <Route path="" element={<Home />} />
+          <Route path="events" element={<Events />} />
           <Route path="auth" element={<Authorization />} />
         </Routes>
       </Layout>
