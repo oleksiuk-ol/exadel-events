@@ -8,8 +8,8 @@ export default function Header() {
       <AppBar position="static">
         <Toolbar sx={{ justifyContent: "space-between" }}>
           {localStorage.getItem("jwt") && (
-            <Button component={Link} to={"/events"} color="inherit">
-              Events
+            <Button component={Link} to={"/createEvent"} color="inherit">
+              Create
             </Button>
           )}
           <Button component={Link} to={"/"} color="inherit">
