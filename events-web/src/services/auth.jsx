@@ -13,13 +13,12 @@ export const signIn = async ({ email, password }) => {
 };
 
 export const signUp = async ({ email, password }) => {
-  axios
+  console.log("SIGNUP");
+
+  return axios
     .post(`http://localhost:3001/users/auth/signUp`, {
       email,
       password,
     })
-    .then((res) => {
-      console.log(res);
-      //   localStorage.setItem("jwt", res.data);
-    });
+    .then((res) => res.data);
 };

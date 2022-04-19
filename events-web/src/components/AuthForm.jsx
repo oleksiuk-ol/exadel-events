@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { userLogin, userRegistration } from "../redux/actions/auth";
-import { useDispatch } from "react-redux";
+import { userSelector } from "../redux/selectors";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
   TextField,
@@ -12,6 +13,7 @@ import {
 } from "@mui/material";
 
 const AuthForm = () => {
+  const userData = useSelector(userSelector);
   const dispatch = useDispatch();
   const [isNew, setIsNew] = useState(false);
   const [user, setUser] = useState({
@@ -59,6 +61,7 @@ const AuthForm = () => {
       flexDirection="column"
       gap="20px"
     >
+      {console.log("UserData ", userData)}
       <Typography textAlign="center" variant="h5">
         {isNew ? "Sign up" : "Log in"}
       </Typography>
