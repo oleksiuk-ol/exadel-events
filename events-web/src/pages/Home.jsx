@@ -5,7 +5,7 @@ import jwt_decode from "jwt-decode";
 const Home = () => {
   const handleButtonClick = () => {
     console.log(localStorage.getItem("jwt"));
-    var decoded = jwt_decode(localStorage.getItem("jwt"));
+    const decoded = jwt_decode(localStorage.getItem("jwt"));
 
     console.log(decoded);
   };

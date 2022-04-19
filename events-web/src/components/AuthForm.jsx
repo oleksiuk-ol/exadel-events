@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { userLogin, userRegistration } from "../redux/actions/auth";
+import { useDispatch } from "react-redux";
 import {
   Box,
   TextField,
@@ -10,6 +12,7 @@ import {
 } from "@mui/material";
 
 const AuthForm = () => {
+  const dispatch = useDispatch();
   const [isNew, setIsNew] = useState(false);
   const [user, setUser] = useState({
     email: "",
@@ -31,14 +34,22 @@ const AuthForm = () => {
   };
 
   const handleButtonClick = () => {
-    axios
-      .post(`http://localhost:3001/users/auth/${isNew ? "signUp" : "logIn"}`, {
-        ...user,
-      })
-      .then((res) => {
-        console.log(res);
-        localStorage.setItem("jwt", res.data);
-      });
+    // axios
+    //   .post(`http://localhost:3001/users/auth/${isNew ? "signUp" : "logIn"}`, {
+    //     ...user,
+    //   })
+    //   .then((res) => {
+    //     console.log(res);
+    //     localStorage.setItem("jwt", res.data);
+    //   });
+
+    dispatch(userRegistration(user.email, user.password));
+
+    // if (isNew) {
+    //   dispatch(userRegistration(userCreds));
+    // } else {
+    //   dispatch(userLogin(userCreds));
+    // }
   };
 
   return (

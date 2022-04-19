@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import {
   Box,
   Typography,
@@ -25,7 +26,9 @@ const CreateEvent = () => {
       address: "",
     },
     onSubmit: (values) => {
-      console.log(values);
+      axios.post(`http://localhost:3001/events`, {
+        ...values,
+      });
     },
   });
 
