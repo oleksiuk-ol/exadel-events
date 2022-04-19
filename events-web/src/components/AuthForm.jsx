@@ -45,7 +45,9 @@ const AuthForm = () => {
     //     localStorage.setItem("jwt", res.data);
     //   });
 
-    dispatch(userRegistration(user.email, user.password));
+    isNew
+      ? dispatch(userRegistration(user.email, user.password))
+      : dispatch(userLogin(user.email, user.password));
 
     // if (isNew) {
     //   dispatch(userRegistration(userCreds));

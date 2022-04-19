@@ -17,14 +17,13 @@ export const userLogin = (email, password) => async (dispatch) => {
   }
 };
 
-export const userRegistration =
-  (email, password) => async (dispatch, getStore) => {
-    console.log("USER REGISTRATION");
+export const userRegistration = (email, password) => async (dispatch) => {
+  console.log("USER REGISTRATION");
 
-    const userEmail = await signUp({ email, password });
-    console.log("USER REG EMAIL", userEmail);
-    if (userEmail) {
-      console.log("USER EMAIL", userEmail);
-      dispatch(authSuccess({ email: userEmail }));
-    }
-  };
+  const userEmail = await signUp({ email, password });
+  console.log("USER REG EMAIL", userEmail);
+  if (userEmail) {
+    console.log("USER EMAIL", userEmail);
+    dispatch(authSuccess({ email: userEmail }));
+  }
+};
