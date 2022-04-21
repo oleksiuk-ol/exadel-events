@@ -13,9 +13,7 @@ const Authorization = () => {
       height="auto"
       padding="20px"
     >
-      {/* {postTest} */}
-      {console.log("Auth")}
-      <AuthForm></AuthForm>
+      <AuthForm />
     </Box>
   );
 };

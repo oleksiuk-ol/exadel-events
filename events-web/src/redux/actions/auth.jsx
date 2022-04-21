@@ -11,19 +11,15 @@ export const logout = () => ({
 });
 
 export const userLogin = (email, password) => async (dispatch) => {
-  const userEmail = await signIn({ email, password });
-  if (userEmail) {
-    dispatch(authSuccess({ email: userEmail }));
+  const userJwt = await signIn({ email, password });
+  if (userJwt) {
+    dispatch(authSuccess({ jwt: userJwt }));
   }
 };
 
 export const userRegistration = (email, password) => async (dispatch) => {
-  console.log("USER REGISTRATION");
-
-  const userEmail = await signUp({ email, password });
-  console.log("USER REG EMAIL", userEmail);
-  if (userEmail) {
-    console.log("USER EMAIL", userEmail);
-    dispatch(authSuccess({ email: userEmail }));
+  const userJwt = await signUp({ email, password });
+  if (userJwt) {
+    dispatch(authSuccess({ jwt: userJwt }));
   }
 };

@@ -10,8 +10,6 @@ export const signIn = async ({ email, password }) => {
 };
 
 export const signUp = async ({ email, password }) => {
-  console.log("SIGNUP");
-
   return axios
     .post(`http://localhost:3001/users/auth/signUp`, {
       email,
