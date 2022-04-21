@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { userLogin, userRegistration } from "../redux/actions/auth";
 import { userSelector } from "../redux/selectors";
 import { useDispatch, useSelector } from "react-redux";

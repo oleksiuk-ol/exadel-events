@@ -10,7 +10,7 @@ const createEvent = async function (req, res) {
 
   //     )
   // }
-  console.log(req);
+  console.log(req.body);
 };
 
 module.exports = {
