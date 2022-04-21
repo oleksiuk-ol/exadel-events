@@ -29,6 +29,7 @@ const CreateEvent = () => {
       address: "",
     },
     onSubmit: (values) => {
+      values.type === "Online" && (values.address = "");
       dispatch(createEventAction(values));
     },
   });
