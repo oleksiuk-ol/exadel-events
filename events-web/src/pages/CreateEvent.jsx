@@ -26,7 +26,7 @@ const CreateEvent = () => {
       address: "",
     },
     onSubmit: (values) => {
-      axios.post(`http://localhost:3001/events`, {
+      axios.post(`http://localhost:3001/event/event/createEvent`, {
         ...values,
       });
     },
