@@ -1,15 +1,21 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import { Box, AppBar, Button, Toolbar } from "@mui/material";
+import jwt_decode from "jwt-decode";
+import { userSelector } from "../redux/selectors";
+import { useSelector } from "react-redux";
 
 export default function Header() {
+  const userData = useSelector(userSelector);
   return (
     <Box>
       <AppBar position="static">
         <Toolbar sx={{ justifyContent: "space-between" }}>
-          {localStorage.getItem("jwt") && (
-            <Button component={Link} to={"/events"} color="inherit">
-              Events
+          {(userData.jwt
+            ? jwt_decode(userData.jwt).role === "admin"
+            : false) && (
+            <Button component={Link} to={"/createEvent"} color="inherit">
+              Create
             </Button>
           )}
           <Button component={Link} to={"/"} color="inherit">

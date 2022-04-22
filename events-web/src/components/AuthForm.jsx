@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { userLogin, userRegistration } from "../redux/actions/auth";
+import { userSelector } from "../redux/selectors";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
   TextField,
@@ -10,6 +13,8 @@ import {
 } from "@mui/material";
 
 const AuthForm = () => {
+  const userData = useSelector(userSelector);
+  const dispatch = useDispatch();
   const [isNew, setIsNew] = useState(false);
   const [user, setUser] = useState({
     email: "",
@@ -20,9 +25,6 @@ const AuthForm = () => {
     setIsNew(event.target.checked);
   };
   const handleInputChange = (event) => {
-    if (localStorage.getItem("jwt") !== null) {
-      console.log("Localstorage exist!", localStorage.getItem("jwt"));
-    }
     const credField = event.target.name;
     setUser({
       ...user,
@@ -31,14 +33,9 @@ const AuthForm = () => {
   };
 
   const handleButtonClick = () => {
-    axios
-      .post(`http://localhost:3001/users/auth/${isNew ? "signUp" : "logIn"}`, {
-        ...user,
-      })
-      .then((res) => {
-        console.log(res);
-        localStorage.setItem("jwt", res.data);
-      });
+    isNew
+      ? dispatch(userRegistration(user.email, user.password))
+      : dispatch(userLogin(user.email, user.password));
   };
 
   return (
@@ -48,6 +45,7 @@ const AuthForm = () => {
       flexDirection="column"
       gap="20px"
     >
+      {console.log("UserData ", userData)}
       <Typography textAlign="center" variant="h5">
         {isNew ? "Sign up" : "Log in"}
       </Typography>
