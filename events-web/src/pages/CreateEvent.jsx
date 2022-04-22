@@ -1,5 +1,6 @@
 import React from "react";
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import { createEventAction } from "../redux/actions/events";
 import {
   Box,
   Typography,
@@ -16,6 +17,8 @@ import AdapterDayJs from "@mui/lab/AdapterDayjs";
 import { useFormik } from "formik";
 
 const CreateEvent = () => {
+  const dispatch = useDispatch();
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -26,9 +29,8 @@ const CreateEvent = () => {
       address: "",
     },
     onSubmit: (values) => {
-      axios.post(`http://localhost:3001/events`, {
-        ...values,
-      });
+      values.type === "Online" && (values.address = "");
+      dispatch(createEventAction(values));
     },
   });
 
