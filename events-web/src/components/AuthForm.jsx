@@ -49,19 +49,21 @@ const AuthForm = () => {
         {isNew ? "Sign up" : "Log in"}
       </Typography>
       <TextField
+        id="email_input"
         label="Email"
         variant="standard"
         name="email"
         onChange={handleInputChange}
       />
       <TextField
+        id="password_input"
         label="Password"
         type="password"
         variant="standard"
         name="password"
         onChange={handleInputChange}
       />
-      <Button variant="contained" onClick={handleButtonClick}>
+      <Button variant="contained" onClick={handleButtonClick} id="auth_submit">
         Log in
       </Button>
       <FormControlLabel
