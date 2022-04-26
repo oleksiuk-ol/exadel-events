@@ -5,10 +5,8 @@ let eventSchema = new mongoose.Schema({
   description: String,
   startDate: Date,
   endDate: Date,
-  type: Boolean,
-  address: {
-    type: String,
-  },
+  type: String,
+  address: String,
 });
 
-module.export = mongoose.model("Event", eventSchema);
+module.exports = mongoose.model("Event", eventSchema);
