@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.1",
     "dayjs": "^1.11.0",
+    "expect-puppeteer": "^6.1.0",
     "formik": "^2.2.9",
     "jwt-decode": "^3.1.2",
     "puppeteer": "^13.6.0",
