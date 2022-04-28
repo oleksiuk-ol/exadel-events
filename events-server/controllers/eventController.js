@@ -14,6 +14,16 @@ const createEvent = async function (req, res) {
   }
 };
 
+const getEvents = async function (req, res) {
+  try {
+    events = await EventService.getAllEvents();
+    res.status(200).send(events);
+  } catch (e) {
+    console.log("Error", e);
+  }
+};
+
 module.exports = {
   createEvent,
+  getEvents,
 };
