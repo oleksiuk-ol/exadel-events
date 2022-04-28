@@ -1,13 +1,14 @@
 const EventModel = require("../models/eventModel");
 
-exports.createEvent = async function (event) {
+exports.createEvent = async function (eventData) {
   try {
     const newEvent = EventModel({
-      name: event.name,
-      description: event.description,
-      startDate: event.startDate,
-      endDate: event.endDate,
-      type: event.type,
+      name: eventData.name,
+      description: eventData.description,
+      startDate: eventData.startDate,
+      endDate: eventData.endDate,
+      type: eventData.type,
+      address: eventData.address,
     });
     await newEvent.save();
     return newEvent;
