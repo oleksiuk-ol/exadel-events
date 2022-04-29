@@ -16,3 +16,12 @@ exports.createEvent = async function (eventData) {
     throw Error("Some error with createEvent");
   }
 };
+
+exports.getAllEvents = async function () {
+  try {
+    const events = await EventModel.find();
+    return events;
+  } catch (e) {
+    throw Error("Some error with getAllEvents");
+  }
+};
